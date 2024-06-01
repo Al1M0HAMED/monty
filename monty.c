@@ -53,17 +53,22 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 		{NULL, NULL}
 	};
 
-	command = strtok(data.buffer, " \n");
+	if (data.buffer[0] == '\n' || data.buffer[0] == '\0')
+        return;
+	command = strtok(data.buffer, " \t\n");
 	while (instructions[i].opcode != NULL)
 	{
 		if (strcmp(instructions[i].opcode, command) == 0)
 		{
+			printf("%s\n", command);
 			instructions[i].f(&data.stack, line_number);
 			unknown = false;
 			break;
 		}
 		else
+		{
 			unknown = true;
+		}
 		i++;
 	}
 	if (unknown)
