@@ -60,7 +60,6 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 	{
 		if (strcmp(instructions[i].opcode, command) == 0)
 		{
-			printf("%s\n", command);
 			instructions[i].f(&data.stack, line_number);
 			unknown = false;
 			break;
