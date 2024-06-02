@@ -28,7 +28,7 @@ int main(int argc, __attribute__((unused)) char *argv[])
 	{
 		line_number++;
 		data.command = strtok(data.buffer, " \n\t");
-		if (data.command == NULL || (data.command && data.command[1] == '#'))
+		if (data.command == NULL || (data.command && data.command[0] == '#'))
 			continue;
 		handle_instructions(&data, line_number);
 	}
