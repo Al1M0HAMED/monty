@@ -33,3 +33,26 @@ void nop(__attribute__((unused)) stack_t **stack,
 {
 
 }
+/**
+ * sub - subs the top two elements of the stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void sub(stack_t **stack, unsigned int line_number)
+{
+	long int n;
+	stack_t *temp = *stack;
+
+	if (stack_len(stack) < 2)
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = temp->next;
+	n = (temp->n - (*stack)->n);
+	pop(stack, line_number);
+	pop(stack, line_number);
+	*stack = add_element(stack, n);
+}
