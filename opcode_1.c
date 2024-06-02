@@ -18,9 +18,9 @@ bool is_empty(stack_t **stack)
 unsigned int stack_len(stack_t **stack)
 {
 	unsigned int len = 0;
-
 	stack_t *temp = *stack;
-	while(temp)
+
+	while (temp)
 	{
 		temp = temp->next;
 	}

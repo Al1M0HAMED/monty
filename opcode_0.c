@@ -83,9 +83,9 @@ void pint(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 	if (is_empty(stack))
 	{
 		free_stack(stack);
-                fclose(data.file_ptr);
-                fprintf(stderr, "L%i: can't pint, stack empty", line_number);
-                exit(EXIT_FAILURE);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't pint, stack empty", line_number);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
