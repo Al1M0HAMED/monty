@@ -82,7 +82,7 @@ void rotr(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 		n = temp_0->n;
 		free(temp_0);
 		temp_1->next = NULL;
-		add_element(stack, n);
+		*stack = add_element(stack, n);
 	}
 }
 
