@@ -46,6 +46,7 @@ typedef struct instruction_s
  * @buffer: is the buffer.
  * @stack: is the stack.
  * @file_ptr: is a file pointer to the monty file.
+ * @is_queue: is detecting if code for stack or queue.
  */
 typedef struct monty_data_s
 {
@@ -53,6 +54,7 @@ typedef struct monty_data_s
 	char *command;
 	stack_t *stack;
 	FILE *file_ptr;
+	bool is_queue;
 } monty_data_t;
 extern monty_data_t data;
 
@@ -72,5 +74,6 @@ void div_stack(stack_t **stack, unsigned int line_number);
 void mod_stack(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 stack_t *add_element(stack_t **stack, long int n);
+stack_t *add_element_end(stack_t **stack, long int n);
 
 #endif

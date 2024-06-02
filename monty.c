@@ -1,5 +1,5 @@
 #include "monty.h"
-monty_data_t data = {"\0", NULL, NULL, NULL};
+monty_data_t data = {"\0", NULL, NULL, NULL, false};
 /**
  * main - reads instruction from monty bytecode file.
  * @argc: arguments count.
@@ -48,17 +48,10 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 	bool unknown = false;
 	int i = 0;
 	instruction_t instructions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"div", div_stack},
-		{"mul", mul},
-		{"mod", mod_stack},
+		{"add", add}, {"nop", nop}, {"sub", sub},
+		{"div", div_stack}, {"mul", mul}, {"mod", mod_stack},
 		{NULL, NULL}
 	};
 	while (instructions[i].opcode != NULL)
@@ -71,7 +64,12 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 		}
 		else
 		{
-			unknown = true;
+			if (strcmp("stack", data.command) == 0)
+				data.is_queue = false;
+			else if (strcmp("queue", data.command) == 0)
+				data.is_queue = true;
+			else
+				unknown = true;
 		}
 		i++;
 	}

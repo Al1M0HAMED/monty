@@ -26,7 +26,10 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%i: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	*stack = add_element(stack, n);
+	if (data.is_queue)
+		add_element_end(stack, n);
+	else
+		*stack = add_element(stack, n);
 }
 /**
  * pall - prints all elements of the stack.
