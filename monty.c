@@ -28,7 +28,7 @@ int main(int argc, __attribute__((unused)) char *argv[])
 	{
 		line_number++;
 		data.command = strtok(data.buffer, " \n\t");
-		if (!data.command)
+		if (data.command == NULL || (data.command && data.command[1] == '#'))
 			continue;
 		handle_instructions(&data, line_number);
 	}
@@ -56,6 +56,9 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", div_stack},
+		{"mul", mul},
+		{"mod", mod_stack},
 		{NULL, NULL}
 	};
 	while (instructions[i].opcode != NULL)
