@@ -1,44 +1,108 @@
 #include "monty.h"
 /**
- * is_empty - checks if the stack is empty.
- * @stack: is the stack
- * Return: true if empty if not return true
+ * push - push element in the stack.
+ * @stack: is the address of the stack.
+ * @line_number: is the line number.
  */
-bool is_empty(stack_t **stack)
+void push(stack_t **stack, unsigned int line_number)
 {
-	if (*stack)
-		return (false);
-	return (true);
+	char *endptr;
+	long int n;
+	char *s;
+
+	s = strtok(NULL, " \n\t");
+	if (s == NULL)
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	n = strtoll(s, &endptr, 10);
+	if (*endptr != '\0')
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	*stack = add_element(stack, n);
 }
 /**
- * stack_len - count stack elements.
- * @stack: is the stack.
- * Return: stac length.
+ * pall - prints all elements of the stack.
+ * @stack: is the address of the stack.
+ * @line_number: is the line number.
  */
-unsigned int stack_len(stack_t **stack)
+void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-	unsigned int len = 0;
 	stack_t *temp = *stack;
 
 	while (temp)
 	{
+		printf("%i\n", temp->n);
 		temp = temp->next;
-		len++;
 	}
-	return (len);
 }
 /**
- * free_stack - this function frees a stack.
+ * pint - prints the top element of the stack.
  * @stack: is the stack.
+ * @line_number: is the line number.
  */
-void free_stack(stack_t **stack)
+void pint(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
-	while (*stack)
+	if (is_empty(stack))
 	{
-		temp = *stack;
-		*stack = (*stack)->next;
-		free(temp);
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		printf("%i\n", (*stack)->n);
+	}
+}
+/**
+ * pop - delets the top element of the stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (is_empty(stack))
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	*stack = (*stack)->next;
+	free(temp);
+}
+/**
+ * swap - swaps the top two elements of a stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+	int n;
+
+	if (stack_len(stack) < 2)
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		temp = temp->next;
+		n = temp->n;
+		temp->n = (*stack)->n;
+		(*stack)->n = n;
 	}
 }
