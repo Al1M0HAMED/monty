@@ -7,10 +7,13 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_element;
-	int n, i = 0;
+	char *endptr;
+	long int n;
 	char *s;
 
-	s = strtok(NULL, " \t\n");
+	if (data.buffer[0] == '\n' || data.buffer[0] == '\0')
+		return;
+	s = strtok(NULL, " \n\t");
 	if (s == NULL)
 	{
 		free_stack(stack);
@@ -18,17 +21,13 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%i: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	n = atoi(s);
-	while (s[i] != '\0')
+	n = strtoll(s, &endptr, 10);
+	if (*endptr != '\0')
 	{
-		if (s[i] > '9' || s[i] < '0')
-		{
-			fclose(data.file_ptr);
-			free_stack(stack);
-			fprintf(stderr, "L%i: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 	new_element = malloc(sizeof(stack_t));
 	if (new_element == NULL)
