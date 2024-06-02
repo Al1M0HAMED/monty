@@ -12,7 +12,7 @@ bool is_empty(stack_t **stack)
 }
 /**
  * stack_len - count stack elements.
- * @tack: is the stack.
+ * @stack: is the stack.
  * Return: stac length.
  */
 unsigned int stack_len(stack_t **stack)
@@ -23,6 +23,22 @@ unsigned int stack_len(stack_t **stack)
 	while (temp)
 	{
 		temp = temp->next;
+		len++;
 	}
 	return (len);
+}
+/**
+ * free_stack - this function frees a stack.
+ * @stack: is the stack.
+ */
+void free_stack(stack_t **stack)
+{
+	stack_t *temp;
+
+	while (*stack)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
+	}
 }

@@ -52,6 +52,7 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 	while (instructions[i].opcode != NULL)

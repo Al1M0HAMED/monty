@@ -59,21 +59,6 @@ void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 	}
 }
 /**
- * free_stack - this function frees a stack.
- * @stack: is the stack.
- */
-void free_stack(stack_t **stack)
-{
-	stack_t *temp;
-
-	while (*stack)
-	{
-		temp = *stack;
-		*stack = (*stack)->next;
-		free(temp);
-	}
-}
-/**
  * pint - prints the top element of the stack.
  * @stack: is the stack.
  * @line_number: is the line number.
@@ -110,4 +95,29 @@ void pop(stack_t **stack, unsigned int line_number)
 	}
 	*stack = (*stack)->next;
 	free(temp);
+}
+/**
+ * swap - swaps the top two elements of a stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+	int n;
+
+	if (stack_len(stack) < 2)
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		temp = temp->next;
+		n = temp->n;
+		temp->n = (*stack)->n;
+		(*stack)->n = n;
+	}
 }
