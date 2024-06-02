@@ -73,6 +73,10 @@ void sub(stack_t **stack, unsigned int line_number);
 void div_stack(stack_t **stack, unsigned int line_number);
 void mod_stack(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, __attribute__((unused)) unsigned int line_number);
+void rotr(stack_t **stack, __attribute__((unused)) unsigned int line_number);
 stack_t *add_element(stack_t **stack, long int n);
 stack_t *add_element_end(stack_t **stack, long int n);
 

@@ -49,8 +49,8 @@ void handle_instructions(__attribute__((unused)) monty_data_t *d,
 	int i = 0;
 	instruction_t instructions[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap},
-		{"add", add}, {"nop", nop}, {"sub", sub},
+		{"swap", swap}, {"pchar", pchar}, {"pstr", pstr}, {"rotl", rotl},
+		{"add", add}, {"nop", nop}, {"sub", sub}, {"rotr", rotr},
 		{"div", div_stack}, {"mul", mul}, {"mod", mod_stack},
 		{NULL, NULL}
 	};
