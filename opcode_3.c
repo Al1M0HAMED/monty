@@ -55,10 +55,11 @@ void pstr(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  */
 void rotl(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-	int n = (*stack)->n;
+	int n;
 
-	if (stack_len(stack) > 1)
+	if (stack_len(stack) > 1 && *stack)
 	{
+		n = (*stack)->n;
 		pop(stack, line_number);
 		add_element_end(stack, n);
 	}
