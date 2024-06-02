@@ -63,5 +63,6 @@ void pall(stack_t **stack, unsigned int n);
 bool is_empty(stack_t **stack);
 unsigned int stack_len(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 
 #endif

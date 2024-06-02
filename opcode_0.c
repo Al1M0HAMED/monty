@@ -78,7 +78,7 @@ void free_stack(stack_t **stack)
  * @stack: is the stack.
  * @line_number: is the line number.
  */
-void pint(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
 	if (is_empty(stack))
 	{
@@ -91,4 +91,23 @@ void pint(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 	{
 		printf("%i\n", (*stack)->n);
 	}
+}
+/**
+ * pop - delets the top element of the stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (is_empty(stack))
+	{
+		free_stack(stack);
+		fclose(data.file_ptr);
+		fprintf(stderr, "L%i: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	*stack = (*stack)->next;
+	free(temp);
 }
