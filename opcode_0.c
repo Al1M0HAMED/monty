@@ -73,3 +73,22 @@ void free_stack(stack_t **stack)
 		free(temp);
 	}
 }
+/**
+ * pint - prints the top element of the stack.
+ * @stack: is the stack.
+ * @line_number: is the line number.
+ */
+void pint(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+{
+	if (is_empty(stack))
+	{
+		free_stack(stack);
+                fclose(data.file_ptr);
+                fprintf(stderr, "L%i: can't pint, stack empty", line_number);
+                exit(EXIT_FAILURE);
+	}
+	else
+	{
+		printf("%i\n", (*stack)->n);
+	}
+}
